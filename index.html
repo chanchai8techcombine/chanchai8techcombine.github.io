@@ -1,10 +1,140 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script>
-        window.onclick = (e) => navigator.clipboard.writeText("^8hv/4B+8Eo<%GB5");
-    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+            transition: filter 0.15s ease;
+            position: relative;
+        }
+
+        .panel:hover {
+            filter: brightness(1.1);
+        }
+
+        .panel:active {
+            filter: brightness(0.9);
+        }
+
+        .panel-left {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-right: 3px solid #0f3460;
+        }
+
+        .panel-right {
+            background: linear-gradient(135deg, #0f3460, #533483);
+        }
+
+        .number {
+            font-size: 8rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.15);
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            line-height: 1;
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .label {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hint {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            z-index: 999;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Left Panel: copies "4" -->
+    <div class="panel panel-left" onclick="copyText('^8hv/4B+8Eo<%GB4')">
+        <div class="icon">📋</div>
+        <div class="label">Copy "4"</div>
+        <div class="hint">Click anywhere to copy</div>
+        <div class="number">4</div>
+    </div>
+
+    <!-- Right Panel: copies "5" -->
+    <div class="panel panel-right" onclick="copyText('^8hv/4B+8Eo<%GB5')">
+        <div class="icon">📋</div>
+        <div class="label">Copy "5"</div>
+        <div class="hint">Click anywhere to copy</div>
+        <div class="number">5</div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        function copyText(value) {
+            navigator.clipboard.writeText(value).then(() => {
+                showToast(`"${value}" copied to clipboard!`);
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+    </script>
+
 </body>
 </html>
